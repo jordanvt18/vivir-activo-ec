@@ -1,0 +1,111 @@
+URL: https://jordanvt18.github.io/vivir-activo-ec/
+
+Aplicación lista tras 2 ms (provincias=25, indicadores=22, filas=221, tiles=4)
+== 1. ESTADO INICIAL (todo el pais) ==
+{
+  "opcionesProvincia": 25,
+  "valorProvincia": "",
+  "opcionesCanton": 222,
+  "valorCanton": "",
+  "primerosCantones": [
+    "Todos los cantones",
+    "Cuenca · IHA 86",
+    "Ibarra · IHA 85",
+    "Mejia · IHA 80"
+  ],
+  "filas": 221,
+  "tituloTabla": "Cantones visibles (221) — ordenados por Índice de Habitabilidad Activa",
+  "fichaRotulo": "Promedio simple del país",
+  "fichaValor": "47,3 / 100",
+  "fichaExtra": "221 cantones · 0 sin datos",
+  "escala": "11,7 / 86,2",
+  "escalaTitulo": "Índice de Habitabilidad Activa · más oscuro = mejor",
+  "explicacion": "Resume en una nota de 0 a 100 cuánta oportunidad tiene el ca",
+  "detalle": [
+    "Cantones visibles221",
+    "Con índice calculado221",
+    "Sin datos suficientes0",
+    "IHA promedio47.3"
+  ],
+  "leyenda": "Índice de Habitabilidad Activa86,273,761,348,936,524,111,7sin datos",
+  "fuentesFilas": 8,
+  "parrafosMetodo": 2,
+  "opcionesIndicador": 22,
+  "imgTiles": 4,
+  "erroresJS": 0
+}
+
+== 2. TRAS ELEGIR PROVINCIA Azuay (01) ==
+{
+  "opcionesCanton": 16,
+  "primerosCantones": [
+    "Todos los cantones",
+    "Cuenca · IHA 86",
+    "Gualaceo · IHA 76",
+    "Giron · IHA 65"
+  ],
+  "filas": 15,
+  "tituloTabla": "Cantones visibles (15) — ordenados por Índice de Habitabilidad Activa",
+  "fichaRotulo": "Azuay · promedio simple",
+  "fichaValor": "46,6 / 100"
+}
+
+== 3. TRAS ELEGIR CANTON 0101 (Cuenca) ==
+{
+  "valorCanton": "0101",
+  "filas": 1,
+  "fichaRotulo": "Cuenca · Azuay",
+  "fichaValor": "86,2 / 100",
+  "fichaExtra": "IHA 86.2 · puesto 1 de 221",
+  "detalle": [
+    "Índice de Habitabilidad Activa86.2 / 100",
+    "1 · Movilidad activa96,1 / 100",
+    "2 · Deporte y recreación97,3 / 100",
+    "3 · Naturaleza y áreas verdes98,6 / 100"
+  ]
+}
+
+== 4. TRAS CAMBIAR INDICADOR a pobreza_fgt0 ==
+{
+  "escala": "15,0% / 15,0%",
+  "escalaTitulo": "Pobreza por ingresos (FGT0) · más oscuro = peor",
+  "explicacion": "Incidencia de pobreza por ingresos (FGT0): proporción de la ",
+  "leyenda": "Pobreza por ingresos (FGT0)115,0%98,3%81,7%65,0%48,3%31,7%15,0%sin datos",
+  "fichaValor": "15,0 %"
+}
+
+== 5. TRAS "Ver todo el pais" ==
+{
+  "valorProvincia": "01",
+  "opcionesCanton": 222,
+  "filas": 221,
+  "tituloTabla": "Cantones visibles (221) — ordenados por Pobreza por ingresos (FGT0)"
+}
+
+== 6. RUTA VACIA: busqueda sin resultados ==
+{
+  "filas": 0,
+  "tituloTabla": "Cantones visibles (0) — ordenados por Pobreza por ingresos (FGT0)"
+}
+
+Captura escritorio guardada.
+Captura movil guardada.
+
+== 8. COMPROBACIONES AUTOMATICAS ==
+PASS | opciones-provincia | esperado 25 (Todo el Ecuador + 24), obtenido 25
+PASS | opciones-canton-nacional | esperado 222 (Todos + 221), obtenido 222
+PASS | filas-tabla-nacional | esperado 221, obtenido 221
+PASS | filtro-provincia-reduce-cantones | Azuay debe ofrecer 15 cantones + "Todos", obtenido 16
+PASS | filtro-provincia-reduce-filas | esperado 15 filas, obtenido 15
+PASS | filtro-canton-una-fila | esperado 1 fila, obtenido 1
+PASS | ficha-muestra-cuenca | rotulo: Cuenca · Azuay
+FAIL | detalle-con-dimensiones | filas de detalle: 4
+PASS | cambio-indicador-recalcula | escala: Pobreza por ingresos (FGT0) · más oscuro = peor
+PASS | boton-pais-restaura | canton: 222, filas: 221
+PASS | busqueda-vacia | esperado 0, obtenido 0
+PASS | sin-errores-js | errores capturados: 0
+PASS | tiles-del-mapa | tiles cargados: 4
+PASS | fuentes-visibles | filas de fuentes: 8
+PASS | indicadores-disponibles | esperado 22, obtenido 22
+
+TOTAL: 15 comprobaciones | PASS: 14 | FAIL: 1

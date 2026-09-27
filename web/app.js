@@ -118,8 +118,12 @@ function inicializar(meta, geoCant, geoProv) {
   selInd.addEventListener('change', e => { estado.indicador = e.target.value; refrescar(); });
 
   document.getElementById('btn-pais').addEventListener('click', () => {
-    estado.provincia = ''; estado.canton = '';
-    setTimeout(reconstruirCantones, 350);
+    estado.provincia = '';
+    estado.canton = '';
+    // El desplegable debe volver a su valor inicial: si no, la interfaz queda
+    // mostrando una provincia activa aunque el mapa ya esté en escala nacional.
+    selProv.value = '';
+    reconstruirCantones();
     refrescar();
   });
   document.getElementById('btn-reset').addEventListener('click', () => {
