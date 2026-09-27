@@ -11,12 +11,7 @@
 
 library(testthat)
 
-raiz <- Sys.getenv("VAEC_ROOT", "")
-if (!nzchar(raiz)) {
-  a <- commandArgs(FALSE)
-  f <- sub("^--file=", "", a[grepl("^--file=", a)])
-  raiz <- if (length(f)) dirname(dirname(normalizePath(f))) else getwd()
-}
+raiz <- raiz_vaec()
 Sys.setenv(VAEC_ROOT = raiz)
 source(file.path(raiz, "R", "lib_strava.R"))
 

@@ -14,12 +14,7 @@
 
 library(testthat)
 
-raiz <- Sys.getenv("VAEC_ROOT", "")
-if (!nzchar(raiz)) {
-  a <- commandArgs(FALSE)
-  f <- sub("^--file=", "", a[grepl("^--file=", a)])
-  raiz <- if (length(f)) dirname(dirname(normalizePath(f))) else getwd()
-}
+raiz <- raiz_vaec()
 source(file.path(raiz, "R", "lib_iha.R"))
 
 # Tabla sintetica: 8 cantones "normales" + 1 sin datos + 1 parcial
