@@ -1,0 +1,10 @@
+{
+  "estado": "no_disponible_sin_licencia",
+  "motivo": "Strava Metro (datos agregados de actividad) requiere un acuerdo de uso con Strava; no es un conjunto de datos abiertos. El heatmap global no puede usarse ni reconstruirse porque sus terminos lo prohiben.",
+  "que_hace_el_proyecto": "El proyecto mide la infraestructura de movilidad activa (OpenStreetMap), el acceso a servicios (HeiGIT) y el contexto socioeconomico, y mantiene este adaptador probado para incorporar Strava Metro cuando exista licencia.",
+  "esquema_esperado": "dpa_canton, actividad_total, ciclistas, peatones, periodo, marca",
+  "columnas_prohibidas": "athlete_id, atleta_id, usuario, user_id, email, correo, lat, lon, latitude, longitude, gps, device_id, nombre, telefono, cedula",
+  "directorio": "data/external/strava_metro/",
+  "datos_integrados": false,
+  "pruebas": "tests/test_strava_adapter.R"
+}

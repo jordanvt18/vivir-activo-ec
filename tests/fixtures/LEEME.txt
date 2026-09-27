@@ -1,0 +1,4 @@
+ARCHIVO SINTETICO: strava_metro_sintetico.csv
+NO SON DATOS REALES DE STRAVA. Sirven unicamente para probar el adaptador.
+Generado con set.seed(20260927) a partir de la poblacion cantonal.
+El propio CSV lleva la columna 'marca' con el valor SINTETICO_NO_SON_DATOS_REALES.

@@ -1,0 +1,32 @@
+# --- R -------------------------------------------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+
+# --- Datos crudos e intermedios -------------------------------------------
+# NO se versionan (~80 MB, incluye límites originales de 46 MB y la caché de la
+# API de Overpass). Son regenerables ejecutando `Rscript R/01_fetch_osm.R` y
+# volviendo a descargar los insumos listados en docs/fuentes_y_licencias.md §1.
+# La trazabilidad se conserva igual: data/processed/fuentes.csv registra fuente,
+# URL, licencia, fecha y unidad de cada variable, y cada bloque de OSM guarda su
+# timestamp en data/interim/osm_estado.json al regenerarse.
+data/raw/
+data/interim/
+data/external/
+
+# Cachés temporales del proyecto
+.tmp/
+*.osm.pbf
+*.osm.pbf.part
+
+# --- Sistema --------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editores -------------------------------------------------------------
+.vscode/
+.idea/
+*.swp

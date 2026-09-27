@@ -1,0 +1,98 @@
+==========================================================================
+VERIFICACION DEL DATASET - Vivir Activo EC
+Ejecutado: 2026-09-27T13:38:22-0500
+==========================================================================
+
+[PASS] cobertura-nacional                             24 provincias y 221 cantones oficiales presentes
+        · provincias en el dataset: 24 (esperado 24)
+        · cantones en el dataset: 221 (esperado 221)
+        · cantones oficiales ausentes: ninguno
+        · codigos fuera de la DPA oficial: ninguno
+
+[PASS] clave-unica                                    dpa_canton es unico
+        · filas: 221 | codigos unicos: 221
+
+[PASS] rangos-validos                                 IHA y dimensiones en [0,100]; pobreza y Gini en [0,1]
+        · IHA: min 11.71 | max 86.15 | n con valor 221
+        · pobreza_fgt0: min 0.0000 | max 0.9095
+        · gini: min 0.2583 | max 0.4911
+        · poblacion > 0 en 221 de 221 cantones
+
+[PASS] sin-ceros-falsos                               Ningun canton 'sin_datos' aparece con IHA = 0
+        · cantones marcados sin_datos: 0
+        · de ellos con IHA = 0: 0
+        · estado_datos: ok=221
+
+[PASS] conteos-osm-consistentes                       La suma cantonal de conteos OSM coincide con la provincial
+        · total nacional de elementos OSM: 106.211
+        · grupo con mayor discrepancia: mov_ciclovia (diferencia 0)
+
+[PASS] emparejamiento-geografico                      Todos los poligonos ADM2 se emparejan o se excluyen explicitamente
+        · poligonos ADM2 leidos: 223
+        · emparejados a la DPA: 221
+        · sin emparejar: 2 -> El Piedrero, Las Golondrinas
+        · exclusiones documentadas: 2 -> EL PIEDRERO, LAS GOLONDRINAS
+        · metodos de cruce: alias_explicito=3 | edicion<=2 (Coronel Marcelino Maridueña)=1 | edicion<=2 (General Antonio Elizalde (Bucay))=1 | excluido_no_es_canton_oficial=2 | provincia+nombre_base=216
+
+[PASS] contraste-poblacion                            Poblacion contrastada con fuente independiente y sensibilidad del ranking
+        · poblacion sumada por canton: 14 347 037
+        · HDX/OCHA-INEC 2020 a nivel provincial: 16 693 205
+        · ratio nacional cantonal/2020 = 0.8595 (diferencia de nivel, no de orden)
+        · dispersion del ratio entre provincias (CV) = 0.064 -> la diferencia es aproximadamente uniforme
+        · correlacion de Spearman del IHA recalculado con poblacion reescalada = 0.9846
+        · la diferencia de nivel y su efecto nulo sobre el orden se documentan en docs/metodologia.md
+
+[PASS] trazabilidad-fuentes                           Toda columna de indicador tiene fuente, URL, licencia y fecha
+        · filas de fuentes.csv: 8
+        · campos obligatorios vacios: ninguno
+        · columnas de indicador sin fila de fuente: ninguna
+
+[PASS] filtros-encadenados                            Cada provincia tiene cantones y existe el caso 'sin datos'
+        · provincias con cantones: 24 / 24
+        · provincia con mas cantones: 09 (25)
+        · provincia con menos cantones: 23 (2)
+        · cantones marcados sin_datos: 0
+
+[PASS] pipeline-completo                              Existen todos los scripts y artefactos del pipeline
+        · artefactos obligatorios: 24
+        · ausentes: ninguno
+
+[PASS] privacidad                                     No hay campos de nivel personal en los datos publicados
+        · columnas con patron personal: ninguna
+        · adaptador Strava: no_disponible_sin_licencia
+        · todos los insumos son agregados por provincia o canton
+
+[PASS] coherencia-indice                              El promedio cantonal y el recalculo provincial del IHA son coherentes
+        · correlacion entre IHA provincial (promedio cantonal) y recalculado: 0.797
+        · IHA provincial: min 32.9 | max 77.4
+        · pesos suman 1.000
+
+[PASS] mecanismo-sin-datos                            Un canton sin insumos queda 'sin_datos' con IHA NA (nunca 0)
+        · canton sintetico sin insumos -> estado 'sin_datos', IHA = NA
+        · cobertura de peso = 0.10 (umbral sin_datos < 0.30)
+        · la logica probada es la misma que publica R/04_build_index.R (R/lib_iha.R)
+
+[PASS] sensibilidad-umbral                            El IHA publica su variante sin umbral y la correlacion entre ordenes
+        · correlacion de Spearman entre ranking con y sin umbral: 0.514
+        · cantones por debajo del umbral de 50.000 hab: 166 de 221
+        · ambas columnas quedan publicadas para auditoria caso por caso
+
+==========================================================================
+RESUMEN
+==========================================================================
+  cobertura-nacional             PASS
+  clave-unica                    PASS
+  rangos-validos                 PASS
+  sin-ceros-falsos               PASS
+  conteos-osm-consistentes       PASS
+  emparejamiento-geografico      PASS
+  contraste-poblacion            PASS
+  trazabilidad-fuentes           PASS
+  filtros-encadenados            PASS
+  pipeline-completo              PASS
+  privacidad                     PASS
+  coherencia-indice              PASS
+  mecanismo-sin-datos            PASS
+  sensibilidad-umbral            PASS
+
+TOTAL: 14 verificaciones | PASS: 14 | FAIL: 0

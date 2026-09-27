@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vivir Activo EC — ¿Dónde vivir en Ecuador? Índice de Habitabilidad Activa</title>
+<meta name="description" content="Explorador interactivo del Índice de Habitabilidad Activa por cantón en Ecuador. Movilidad activa, deporte, naturaleza, acceso a salud y educación, servicios y contexto socioeconómico. Datos abiertos de INEC/OCHA, OpenStreetMap y HeiGIT." />
+<meta name="color-scheme" content="light" />
+<link rel="preconnect" href="https://unpkg.com" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="cabecera-inner">
+    <div class="marca">
+      <span class="marca-simbolo" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="34" height="34">
+          <circle cx="16" cy="16" r="14.5" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+          <path d="M6 20 L12 11 L17 17 L21 12 L26 19" fill="none" stroke="#a9723f" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="12" cy="11" r="2" fill="#7d8f69"/>
+        </svg>
+      </span>
+      <div>
+        <h1>Vivir Activo EC</h1>
+        <p class="lema">Dónde es más fácil vivir una vida cotidiana activa, cantón por cantón.</p>
+      </div>
+    </div>
+    <div class="cabecera-meta" id="cabecera-meta">
+      <span class="chip chip-acento">IHA v1.0</span>
+      <span class="chip">221 cantones · 24 provincias</span>
+      <span class="chip" id="chip-verde">Sin datos personales</span>
+    </div>
+  </div>
+</header>
+
+<main class="diseno">
+
+  <!-- ------------------------- Panel lateral ------------------------- -->
+  <aside class="lateral" id="lateral">
+
+    <section class="tarjeta">
+      <h2>1 · Elige dónde mirar</h2>
+      <label class="campo">
+        <span>Provincia</span>
+        <select id="sel-provincia"></select>
+      </label>
+      <label class="campo">
+        <span>Cantón</span>
+        <select id="sel-canton"></select>
+      </label>
+      <p class="pista" id="pista-filtro">Estás viendo todo el Ecuador.</p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>2 · Qué pintar en el mapa</h2>
+      <label class="campo">
+        <span>Indicador</span>
+        <select id="sel-indicador"></select>
+      </label>
+      <div class="escala" id="escala">
+        <div class="escala-barra" id="escala-barra"></div>
+        <div class="escala-extremos">
+          <span id="escala-min">—</span>
+          <span id="escala-max">—</span>
+        </div>
+        <p class="escala-titulo" id="escala-titulo"></p>
+      </div>
+      <p class="aviso" id="aviso-sin-datos">
+        Los cantones en gris no tienen datos suficientes. No son un cero: no se midieron.
+      </p>
+    </section>
+
+    <section class="tarjeta" id="tarjeta-explica">
+      <h2>Qué significa</h2>
+      <p class="explica" id="explica-indicador">—</p>
+    </section>
+
+    <section class="tarjeta colapsable" id="tarjeta-como">
+      <h2 class="plegable" data-objetivo="cuerpo-como">Cómo leer este mapa <span class="flecha">▾</span></h2>
+      <div class="cuerpo" id="cuerpo-como">
+        <ol class="pasos">
+          <li>Elige una <b>provincia</b> y, si quieres afinar, un <b>cantón</b>. La lista de cantones se actualiza sola con los cantones de esa provincia.</li>
+          <li>Elige qué quieres comparar en <b>Qué pintar en el mapa</b>: el índice general o una de sus seis dimensiones.</li>
+          <li>El color se recalcula siempre <b>entre los cantones visibles</b>. Si ves todo el país comparas contra el país; si ves una provincia, comparas dentro de ella.</li>
+          <li>Pasa el mouse por un cantón para ver su ficha, o haz clic para fijarla abajo.</li>
+          <li>Los valores <b>no son notas absolutas</b>. La nota depende del grupo contra el que se compara.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tarjeta colapsable" id="tarjeta-limites">
+      <h2 class="plegable" data-objetivo="cuerpo-limites">Límites de este análisis <span class="flecha">▾</span></h2>
+      <div class="cuerpo" id="cuerpo-limites">
+        <ul class="lista-aviso">
+          <li>Mide <b>oportunidad de vida activa y acceso</b>. No mide vivienda, empleo, seguridad ni calidad de los servicios.</li>
+          <li>OpenStreetMap refleja <b>infraestructura mapeada</b>: un cantón con buena infraestructura sin mapear aparece penalizado.</li>
+          <li>No usamos el heatmap ni datos individuales de <b>Strava</b>. Strava Metro exige un acuerdo de uso; el conector está implementado pero sin licencia el indicador queda en "no disponible".</li>
+          <li>Los tiempos de acceso son estimaciones de viaje <b>en auto</b>, no mediciones de tráfico real.</li>
+          <li>Esto <b>no es asesoría inmobiliaria, legal ni financiera</b>. Es una herramienta de exploración de datos abiertos.</li>
+        </ul>
+      </div>
+    </section>
+
+  </aside>
+
+  <!-- ------------------------- Columna principal ------------------------- -->
+  <section class="principal">
+
+    <div class="mapa-envoltorio">
+      <div id="mapa" role="application" aria-label="Mapa coroplético de cantones de Ecuador"></div>
+      <div class="mapa-controles">
+        <button id="btn-pais" class="boton">Ver todo el país</button>
+        <button id="btn-reset" class="boton boton-suave">Limpiar selección</button>
+      </div>
+    </div>
+
+    <div class="rejilla-resumen">
+      <div class="ficha">
+        <span class="ficha-rotulo" id="ficha-rotulo">Promedio de lo visible</span>
+        <span class="ficha-valor" id="ficha-valor">—</span>
+        <span class="ficha-extra" id="ficha-extra">—</span>
+      </div>
+      <div class="ficha-panel" id="detalle-panel">
+        <table class="tabla-detalle"><tbody id="detalle-cuerpo"></tbody></table>
+      </div>
+    </div>
+
+    <section class="tarjeta tabla-tarjeta">
+      <div class="tabla-cabecera">
+        <h2 id="tabla-titulo">Todos los cantones visibles</h2>
+        <div class="tabla-acciones">
+          <input type="search" id="buscar" placeholder="Buscar cantón o provincia…" />
+          <button id="btn-csv" class="boton boton-suave">Descargar CSV</button>
+        </div>
+      </div>
+      <div class="tabla-scroll">
+        <table id="tabla">
+          <thead><tr id="tabla-cabeceras"></tr></thead>
+          <tbody id="tabla-cuerpo"></tbody>
+        </table>
+      </div>
+      <p class="pista" id="tabla-pie"></p>
+    </section>
+
+    <section class="tarjeta colapsable">
+      <h2 class="plegable" data-objetivo="cuerpo-metodo">Metodología, fuentes y descarga de datos <span class="flecha">▾</span></h2>
+      <div class="cuerpo" id="cuerpo-metodo">
+        <p class="explica">
+          El <b>Índice de Habitabilidad Activa (IHA v1.0)</b> combina seis dimensiones con pesos fijos:
+          movilidad activa (22 %), deporte y recreación (18 %), acceso a salud y educación (20 %),
+          naturaleza y áreas verdes (15 %), servicios y vida cotidiana (15 %) y contexto socioeconómico (10 %).
+          Cada indicador se suaviza por credibilidad para que los cantones muy pequeños no dominen el ranking,
+          se convierte a rango percentil y se agrega con los pesos, renormalizando sobre lo que sí tiene dato.
+        </p>
+        <p class="explica">
+          <b>Sin huecos silenciosos:</b> si un cantón no alcanza cobertura de datos suficiente, su índice queda como
+          <i>sin datos</i> (nunca 0) y se marca en gris aquí y en la tabla.
+        </p>
+        <h3>Fuentes</h3>
+        <div class="tabla-scroll"><table id="tabla-fuentes"><thead>
+          <tr><th>Variable</th><th>Fuente</th><th>Licencia</th><th>Fecha</th><th>Unidad</th></tr>
+        </thead><tbody></tbody></table></div>
+        <h3>Descargas</h3>
+        <ul class="descargas">
+          <li><a href="./data/iha_cantones.csv" download>iha_cantones.csv — tabla completa por cantón</a></li>
+          <li><a href="./data/iha_provincias.csv" download>iha_provincias.csv — agregado provincial</a></li>
+          <li><a href="./data/iha_metodologia.json" download>iha_metodologia.json — pesos y fórmulas</a></li>
+          <li><a href="./data/cantones.geojson" download>cantones.geojson — límites cantonales</a></li>
+        </ul>
+        <p class="pista" id="pie-version"></p>
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<footer class="pie">
+  <p>
+    Proyecto de datos abiertos sobre <b>dónde vivir en Ecuador</b> desde la actividad y el entorno construido.
+    Contenido y análisis: <b>vivir-activo-ec</b>. Código y datos: <span id="pie-repo">repositorio</span>.
+  </p>
+  <p class="pie-aviso">
+    Uso de datos agregados exclusivamente. No se rastrea a ninguna persona ni se muestran datos identificables.
+    OpenStreetMap © colaboradores de OpenStreetMap (ODbL 1.0) · Límites: geoBoundaries (CC BY 3.0 IGO) ·
+    Población y pobreza: HDX / INEC · Accesibilidad: HeiGIT (CC BY 4.0).
+  </p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./app.js"></script>
+</body>
+</html>

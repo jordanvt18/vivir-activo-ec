@@ -1,0 +1,58 @@
+{
+  "version": "IHA v1.0",
+  "fecha_calculo": "2026-09-27T13:36:22-0500",
+  "unidad_analisis": "canton (221 cantones oficiales de la DPA del INEC)",
+  "escala": "0-100, mayor es mejor",
+  "pesos": {
+    "D1_movilidad_activa": 0.22,
+    "D2_deporte_recreacion": 0.18,
+    "D3_naturaleza_areas_verdes": 0.15,
+    "D4_acceso_salud_educacion": 0.2,
+    "D5_servicios_vida_cotidiana": 0.15,
+    "D6_contexto_socioeconomico": 0.1
+  },
+  "denominador": {
+    "umbral_masa_critica_habitantes": 50000,
+    "formula": "denominador = max(poblacion, 50000) / 100000",
+    "justificacion": "Sin umbral, un canton rural de pocos miles de habitantes con dos canchas y un parque obtiene una tasa altisima y desplaza a ciudades reales en el ranking. Ese orden es un artefacto aritmetico del denominador, no una diferencia de oportunidad. El umbral fija la oferta de un canton pequeno contra una masa minima de poblacion."
+  },
+  "suavizado": {
+    "formula": "tasa_suav = (conteo + m * tasa_nacional) / (denominador + m)",
+    "m": 1,
+    "tasa_nacional": "sum(conteos) / sum(denominadores)",
+    "justificacion": "Estimador de credibilidad: evita que un canton con un solo equipamiento salte al primer puesto."
+  },
+  "tasas_nacionales_por_100k": {
+    "n_movilidad_ciclista": 5.269,
+    "n_red_peatonal": 238.1058,
+    "n_senderos": 105.076,
+    "n_deporte": 73.4827,
+    "n_naturaleza": 42.6049,
+    "n_servicios": 70.1777
+  },
+  "sub_indicadores": {
+    "D1": ["n_movilidad_ciclista (mov_ciclovia + 0.5*mov_ruta_bici)", "n_red_peatonal (mov_vereda + mov_peatonal_zona + mov_escaleras)", "n_senderos (mov_sendero + mov_ruta_senderismo)"],
+    "D2": "n_deporte (pitch + sports_centre + fitness_centre + swimming_pool + track + stadium + playground)",
+    "D3": "n_naturaleza (park + garden + nature_reserve + recreation_ground)",
+    "D4": ["acc_hospital_30min_pct (poblacion a <=30 min en auto de un hospital)", "acc_salud_primaria_30min_pct (atencion primaria <=30 min)", "acc_educacion_5km_pct (escuela a <=5 km en auto)"],
+    "D5": "n_servicios (school + university + library + marketplace + supermarket + station)",
+    "D6": ["0.7 * tasa_no_pobreza (1 - FGT0)", "0.3 * tasa_igualdad (1 - Gini)"]
+  },
+  "normalizacion": "rango percentil entre cantones con dato: rank(ties.method='average')/(n+1)*100",
+  "agregacion": "IHA = sum(peso_d * D_d) / sum(peso_d disponible); los pesos se renormalizan sobre las dimensiones disponibles",
+  "umbrales_estado_datos": {
+    "ok": "cobertura_peso >= 0.60",
+    "parcial": "0.30 <= cobertura_peso < 0.60",
+    "sin_datos": "cobertura_peso < 0.30 o poblacion NA"
+  },
+  "sin_datos_en_este_corte": 0,
+  "sensibilidad": {
+    "variante": "IHA_sin_umbral: mismos datos y pesos, pero denominador = poblacion real (sin umbral de masa critica)",
+    "correlacion_spearman_de_rankings": 0.514,
+    "lectura": "Los cambios se concentran en los cantones por debajo del umbral. Ambas columnas se publican para poder auditar caso por caso; la variante principal es la que aplica el umbral."
+  },
+  "agregacion_provincial": "IHA de provincia = promedio de los IHA cantonales ponderado por poblacion. Se publica ademas IHA_recalculado_provincial, que recalcula tasas y percentiles a escala provincial. No son identicos por construccion: el percentil depende del conjunto de unidades comparadas.",
+  "limitaciones": ["OpenStreetMap mide infraestructura mapeada, no uso real: un canton con buena infraestructura no mapeada se subestima.", "No se usa el heatmap ni datos individuales de Strava: Strava Metro exige acuerdo de uso. El adaptador esta implementado y probado, pero sin datos licenciados el indicador Strava queda no disponible.", "La accesibilidad HeiGIT usa tiempos y distancias de viaje en auto estimados sobre OSM, no trafico real. Educacion viene por distancia, no por tiempo.", "Pobreza y Gini son estimaciones por canton, no conteos censales exactos.", "El IHA ordena oportunidades de vida activa y acceso; no mide calidad de vivienda, empleo ni seguridad.", "El umbral de masa critica es una decision de diseno explicita y verificable (ver 'sensibilidad')."],
+  "fuentes": "data/processed/fuentes.csv",
+  "datos_personales": "Ninguno. Todos los insumos son agregados por unidad geografica."
+}
