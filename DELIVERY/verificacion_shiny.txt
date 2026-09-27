@@ -1,0 +1,73 @@
+URL: http://127.0.0.1:7654/
+
+Aplicación lista (controles y salidas renderizados): true
+
+== 1. ESTADO INICIAL ==
+{
+  "provincia": {
+    "opciones": 25,
+    "valor": ""
+  },
+  "canton": {
+    "opciones": 222,
+    "valor": ""
+  },
+  "indicador": {
+    "opciones": 11,
+    "valor": "IHA"
+  },
+  "fichaRotulo": "Promedio de lo visible",
+  "fichaValor": "47.3 / 100",
+  "fichaExtra": "221 cantones en pantalla",
+  "tituloDetalle": "Resumen del territorio visible",
+  "filasDetalle": 8,
+  "filasDT": 12,
+  "filasDTInfo": "",
+  "poligonosMapa": 221,
+  "canvasMapa": 0,
+  "tiles": 15,
+  "explicacion": 359,
+  "errores": 0
+}
+
+== 2. TRAS ELEGIR PROVINCIA Azuay ==
+{
+  "opcionesCanton": 16,
+  "fichaRotulo": "Promedio de lo visible",
+  "filasDT": 12,
+  "poligonos": 15
+}
+
+== 3. TRAS ELEGIR CANTON 0101 (Cuenca) ==
+{
+  "valorCanton": "0101",
+  "fichaRotulo": "Cuenca · Azuay",
+  "fichaValor": "86.2 / 100",
+  "fichaExtra": "Puesto 1 de 221 cantones con indice",
+  "filasDetalle": 15
+}
+
+== 4. TRAS CAMBIAR INDICADOR ==
+{
+  "indicador": "pobreza_fgt0",
+  "fichaValor": "15.0 %",
+  "explicacion": 142
+}
+
+Captura de la app Shiny guardada.
+
+== RESUMEN ==
+PASS | shiny-provincias-cargadas | opciones de provincia: 25 (esperado 25)
+PASS | shiny-cantones-nacional | opciones de cantón: 222 (esperado 222)
+PASS | shiny-indicadores | opciones de indicador: 11 (esperado 11)
+PASS | shiny-tabla-inicial | filas visibles de la tabla (paginada a 12): 12
+PASS | shiny-filtro-provincia-encadena | cantones de Azuay: 16 (esperado 15 + "todos")
+PASS | shiny-filtro-canton-enfoca | rotulo de la ficha: Cuenca · Azuay
+PASS | shiny-ficha-con-valor | valor de la ficha: 86.2 / 100
+PASS | shiny-detalle-con-filas | filas del detalle: 15
+PASS | shiny-cambio-indicador | valor antes: 86.2 / 100 | después: 15.0 %
+PASS | shiny-explicacion-presente | caracteres de explicación: 359
+PASS | shiny-mapa-dibujado | polígonos SVG: 221, canvas: 0
+PASS | shiny-sin-errores-js | errores capturados: 0
+
+TOTAL: 12 comprobaciones | PASS: 12 | FAIL: 0

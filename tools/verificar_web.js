@@ -205,12 +205,13 @@ const ESTADO_JS = `(() => ({
     }, null, 2));
 
     // --- 5. Volver al pais ---
-    await cdp.evaluar(`document.getElementById('btn-pais').click()`);
+    const clickRes = await cdp.evaluar(`(() => { try { document.getElementById('btn-pais').click(); return 'ok'; } catch(e) { return 'error: '+e.message; } })()`);
+    const valInmediato = await cdp.evaluar(`document.getElementById('sel-provincia').value`);
     await esperar(1500);
     const trasPais = await cdp.evaluar(ESTADO_JS);
     log('');
     log('== 5. TRAS "Ver todo el pais" ==');
-    log(JSON.stringify({ valorProvincia: trasPais.valorProvincia, opcionesCanton: trasPais.opcionesCanton, filas: trasPais.filas, tituloTabla: trasPais.tituloTabla }, null, 2));
+    log(JSON.stringify({ click: clickRes, valorProvinciaInmediato: valInmediato, valorProvincia: trasPais.valorProvincia, opcionesCanton: trasPais.opcionesCanton, filas: trasPais.filas, tituloTabla: trasPais.tituloTabla }, null, 2));
 
     // --- 6. Ruta vacia: busqueda sin resultados ---
     await cdp.evaluar(`(() => { const b=document.getElementById('buscar'); b.value='zzzz-no-existe'; b.dispatchEvent(new Event('input')); return true; })()`);

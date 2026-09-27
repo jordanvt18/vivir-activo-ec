@@ -1,0 +1,212 @@
+== ESCRITORIO 1440x1000 ==
+{
+  "tamaños": {
+    "mapa": {
+      "x": 14,
+      "y": 1661,
+      "w": 347,
+      "h": 340
+    },
+    "provincia": {
+      "x": 30,
+      "y": 252,
+      "w": 315,
+      "h": 37
+    },
+    "canton": {
+      "x": 30,
+      "y": 320,
+      "w": 315,
+      "h": 37
+    },
+    "indicador": {
+      "x": 30,
+      "y": 474,
+      "w": 315,
+      "h": 37
+    },
+    "escala": {
+      "x": 30,
+      "y": 523,
+      "w": 315,
+      "h": 12
+    },
+    "ficha": {
+      "x": 14,
+      "y": 2015,
+      "w": 347,
+      "h": 101
+    },
+    "detalle": {
+      "x": 14,
+      "y": 2130,
+      "w": 347,
+      "h": 201
+    },
+    "tabla": {
+      "x": 30,
+      "y": 2459,
+      "w": 1154,
+      "h": 7050
+    },
+    "fuentes": {
+      "x": 30,
+      "y": 9993,
+      "w": 516,
+      "h": 887
+    },
+    "cabecera": {
+      "x": 0,
+      "y": 0,
+      "w": 375,
+      "h": 176
+    },
+    "pie": {
+      "x": 0,
+      "y": 11102,
+      "w": 375,
+      "h": 222
+    }
+  },
+  "enCero": [],
+  "overflow": {
+    "documento": 0,
+    "anchoVentana": 390,
+    "anchoDocumento": 375
+  },
+  "salidos": [],
+  "tablaConScroll": true,
+  "textos": {
+    "fichaValor": "47,3 / 100",
+    "escalaMin": "11,7",
+    "escalaMax": "86,2",
+    "explica": 343,
+    "leyenda": 67,
+    "piePagina": 293
+  },
+  "mapa": {
+    "tiles": 4,
+    "svgPath": 0,
+    "canvas": 1,
+    "controlesZoom": 1
+  },
+  "coloresCanvas": 61,
+  "pixelesPintados": 135,
+  "altoPagina": 11324
+}
+
+== MOVIL 390x844 ==
+{
+  "tamaños": {
+    "mapa": {
+      "x": 14,
+      "y": 1602,
+      "w": 362,
+      "h": 340
+    },
+    "provincia": {
+      "x": 30,
+      "y": 252,
+      "w": 330,
+      "h": 37
+    },
+    "canton": {
+      "x": 30,
+      "y": 320,
+      "w": 330,
+      "h": 37
+    },
+    "indicador": {
+      "x": 30,
+      "y": 474,
+      "w": 330,
+      "h": 37
+    },
+    "escala": {
+      "x": 30,
+      "y": 523,
+      "w": 330,
+      "h": 12
+    },
+    "ficha": {
+      "x": 14,
+      "y": 1956,
+      "w": 362,
+      "h": 101
+    },
+    "detalle": {
+      "x": 14,
+      "y": 2071,
+      "w": 362,
+      "h": 201
+    },
+    "tabla": {
+      "x": 30,
+      "y": 2399,
+      "w": 1154,
+      "h": 7050
+    },
+    "fuentes": {
+      "x": 30,
+      "y": 9883,
+      "w": 516,
+      "h": 887
+    },
+    "cabecera": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 176
+    },
+    "pie": {
+      "x": 0,
+      "y": 10978,
+      "w": 390,
+      "h": 222
+    }
+  },
+  "enCero": [],
+  "overflow": {
+    "documento": 0,
+    "anchoVentana": 390,
+    "anchoDocumento": 390
+  },
+  "salidos": [],
+  "tablaConScroll": true,
+  "textos": {
+    "fichaValor": "47,3 / 100",
+    "escalaMin": "11,7",
+    "escalaMax": "86,2",
+    "explica": 343,
+    "leyenda": 67,
+    "piePagina": 293
+  },
+  "mapa": {
+    "tiles": 4,
+    "svgPath": 0,
+    "canvas": 1,
+    "controlesZoom": 1
+  },
+  "coloresCanvas": 61,
+  "pixelesPintados": 135,
+  "altoPagina": 11200
+}
+
+== RESUMEN ==
+PASS | escritorio-sin-desbordamiento | scrollWidth - clientWidth = 0
+PASS | escritorio-elementos-con-tamano | elementos en cero: ninguno
+PASS | escritorio-mapa-dibujado | canvas: 1, tiles: 4, colores distintos en el canvas: 61, muestras pintadas: 135
+PASS | escritorio-ficha-con-valor | ficha: 47,3 / 100
+PASS | escritorio-explicacion-presente | caracteres de explicación: 343
+PASS | escritorio-leyenda-presente | caracteres de leyenda: 67
+PASS | escritorio-aviso-legal-presente | caracteres del aviso: 293
+PASS | escritorio-sin-elementos-salidos | bloques fuera del viewport: ninguno
+PASS | movil-sin-desbordamiento | scrollWidth - clientWidth = 0
+PASS | movil-elementos-con-tamano | elementos en cero: ninguno
+PASS | movil-mapa-visible | alto del mapa: 340 px
+PASS | movil-tabla-con-scroll | contenedor de tabla con scroll propio: true
+PASS | movil-ficha-con-valor | ficha: 47,3 / 100
+PASS | movil-mapa-dibujado | canvas: 1, colores distintos: 61
+PASS | movil-sin-elementos-salidos | bloques fuera del viewport: ninguno
+
+TOTAL: 15 comprobaciones | PASS: 15 | FAIL: 0

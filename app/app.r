@@ -72,13 +72,20 @@ datos$provincia <- as.character(datos$provincia)
 datos$canton    <- as.character(datos$canton)
 provincias_lista <- sort(unique(datos$provincia))
 
+# Lista de cantones: si no hay provincia elegida se ofrecen TODOS los cantones
+# del pais, para poder buscar uno concreto sin pasar por la provincia.
 etiqueta_canton <- function(p) {
-  d <- datos[datos$provincia == p, c("dpa_canton","canton","IHA")]
+  d <- if (nzchar(p)) datos[datos$provincia == p, c("dpa_canton","canton","IHA")] else
+                         datos[, c("dpa_canton","canton","IHA","provincia")]
   d <- d[order(-d$IHA), ]
-  vals <- setNames(as.character(d$dpa_canton),
-                   ifelse(is.na(d$IHA), paste0(d$canton, " (sin datos)"),
-                          sprintf("%s  (IHA %.0f)", d$canton, d$IHA)))
-  c("Todos los cantones de la provincia" = "", vals)
+  texto <- ifelse(is.na(d$IHA),
+                  paste0(d$canton, if ("provincia" %in% names(d)) paste0(" (", d$provincia, ")") else "", " (sin datos)"),
+                  sprintf(paste0("%s%s  (IHA %.0f)"),
+                          d$canton,
+                          if ("provincia" %in% names(d)) paste0(" · ", d$provincia) else "",
+                          d$IHA))
+  c(if (nzchar(p)) "Todos los cantones de la provincia" = "" else "Todos los cantones del Ecuador" = "",
+    setNames(as.character(d$dpa_canton), texto))
 }
 
 fmt_num <- function(x, indicador) {
@@ -113,7 +120,7 @@ ui <- fluidPage(
              font-size:12.5px; color:#5a4a33; border-radius:3px; }
     .tabla-mini td, .tabla-mini th { font-size:12.5px; padding:4px 6px; }
     .leaflet-container { background:#eef1ea; }
-  ", COL_ACENTO, COL_SALVIA, COL_ACENTO)))),
+  ", COL_ACENTO, COL_ACENTO, COL_SALVIA, COL_ACENTO)))),
   div(class = "titulo",
       h1("Vivir Activo EC"),
       p("Indice de Habitabilidad Activa por canton. Datos abiertos: INEC/OCHA, OpenStreetMap, HeiGIT.",
@@ -122,9 +129,9 @@ ui <- fluidPage(
     sidebarPanel(width = 3,
       div(class = "panel-lateral",
         h4("1. Elige donde mirar"),
-        selectInput("provincia", "Provincia", choices = c("Todo el Ecuador" = "", provincias_lista)),
-        selectInput("canton_filtro", "Canton", choices = c("Todos los cantones de la provincia" = "")),
-        selectInput("indicador", "2. Que quieres ver en el mapa", choices = INDICADORES, selected = "IHA")
+        selectInput("provincia", "Provincia", choices = c("Todo el Ecuador" = "", provincias_lista), selectize = FALSE),
+        selectInput("canton_filtro", "Canton", choices = etiqueta_canton(""), selected = "", selectize = FALSE),
+        selectInput("indicador", "2. Que quieres ver en el mapa", choices = INDICADORES, selected = "IHA", selectize = FALSE)
       ),
       div(class = "panel-lateral",
         h4("Que significa"),
@@ -160,12 +167,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   observeEvent(input$provincia, {
-    sel <- input$provincia
-    if (!nzchar(sel)) {
-      updateSelectInput(session, "canton_filtro", choices = c("Todos los cantones de la provincia" = ""), selected = "")
-    } else {
-      updateSelectInput(session, "canton_filtro", choices = etiqueta_canton(sel), selected = "")
-    }
+    updateSelectInput(session, "canton_filtro", choices = etiqueta_canton(input$provincia), selected = "")
   }, ignoreNULL = FALSE)
 
   cant_visibles <- reactive({

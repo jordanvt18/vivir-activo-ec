@@ -1,6 +1,6 @@
 URL: https://jordanvt18.github.io/vivir-activo-ec/
 
-Aplicación lista tras 2 ms (provincias=25, indicadores=22, filas=221, tiles=4)
+Aplicación lista tras 1009 ms (provincias=25, indicadores=22, filas=221, tiles=4)
 == 1. ESTADO INICIAL (todo el pais) ==
 {
   "opcionesProvincia": 25,
@@ -27,6 +27,7 @@ Aplicación lista tras 2 ms (provincias=25, indicadores=22, filas=221, tiles=4)
     "Sin datos suficientes0",
     "IHA promedio47.3"
   ],
+  "detalleFilas": 7,
   "leyenda": "Índice de Habitabilidad Activa86,273,761,348,936,524,111,7sin datos",
   "fuentesFilas": 8,
   "parrafosMetodo": 2,
@@ -76,7 +77,9 @@ Aplicación lista tras 2 ms (provincias=25, indicadores=22, filas=221, tiles=4)
 
 == 5. TRAS "Ver todo el pais" ==
 {
-  "valorProvincia": "01",
+  "click": "ok",
+  "valorProvinciaInmediato": "",
+  "valorProvincia": "",
   "opcionesCanton": 222,
   "filas": 221,
   "tituloTabla": "Cantones visibles (221) — ordenados por Pobreza por ingresos (FGT0)"
@@ -99,13 +102,13 @@ PASS | filtro-provincia-reduce-cantones | Azuay debe ofrecer 15 cantones + "Todo
 PASS | filtro-provincia-reduce-filas | esperado 15 filas, obtenido 15
 PASS | filtro-canton-una-fila | esperado 1 fila, obtenido 1
 PASS | ficha-muestra-cuenca | rotulo: Cuenca · Azuay
-FAIL | detalle-con-dimensiones | filas de detalle: 4
+PASS | detalle-con-dimensiones | filas de detalle de la ficha: 14 (esperado >= 14)
 PASS | cambio-indicador-recalcula | escala: Pobreza por ingresos (FGT0) · más oscuro = peor
-PASS | boton-pais-restaura | canton: 222, filas: 221
+PASS | boton-pais-restaura | provincia: "", cantones: 222, filas: 221
 PASS | busqueda-vacia | esperado 0, obtenido 0
 PASS | sin-errores-js | errores capturados: 0
 PASS | tiles-del-mapa | tiles cargados: 4
 PASS | fuentes-visibles | filas de fuentes: 8
 PASS | indicadores-disponibles | esperado 22, obtenido 22
 
-TOTAL: 15 comprobaciones | PASS: 14 | FAIL: 1
+TOTAL: 15 comprobaciones | PASS: 15 | FAIL: 0
