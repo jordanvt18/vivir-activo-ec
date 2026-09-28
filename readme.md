@@ -9,6 +9,17 @@ construido con datos abiertos, un mapa interactivo y toda la metodología audita
 
 ---
 
+## En línea
+
+**Aplicación web (mapa dinámico, filtros encadenados de provincia y cantón):**
+
+> ### → https://jordanvt18.github.io/vivir-activo-ec/
+
+Servida con **GitHub Pages** desde la rama `gh-pages` de este repositorio. Es un sitio estático:
+no necesita servidor ni R en producción. Aplicación equivalente en R (Shiny) en `app/`.
+
+---
+
 ## Qué es esto
 
 La idea de partida es la de los análisis que usan datos de actividad física (Strava y similares)
