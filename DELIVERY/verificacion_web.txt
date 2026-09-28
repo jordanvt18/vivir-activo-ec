@@ -1,6 +1,6 @@
 URL: https://jordanvt18.github.io/vivir-activo-ec/
 
-Aplicación lista tras 1009 ms (provincias=25, indicadores=22, filas=221, tiles=4)
+Aplicación lista tras 3 ms (provincias=25, indicadores=22, filas=221, tiles=4)
 == 1. ESTADO INICIAL (todo el pais) ==
 {
   "opcionesProvincia": 25,

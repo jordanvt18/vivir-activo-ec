@@ -2,77 +2,77 @@
 {
   "tamaños": {
     "mapa": {
-      "x": 364,
-      "y": 107,
-      "w": 1016,
-      "h": 560
+      "x": 14,
+      "y": 1661,
+      "w": 347,
+      "h": 340
     },
     "provincia": {
-      "x": 40,
-      "y": 169,
-      "w": 288,
+      "x": 30,
+      "y": 252,
+      "w": 315,
       "h": 37
     },
     "canton": {
-      "x": 40,
-      "y": 237,
-      "w": 288,
+      "x": 30,
+      "y": 320,
+      "w": 315,
       "h": 37
     },
     "indicador": {
-      "x": 40,
-      "y": 391,
-      "w": 288,
+      "x": 30,
+      "y": 474,
+      "w": 315,
       "h": 37
     },
     "escala": {
-      "x": 40,
-      "y": 440,
-      "w": 288,
+      "x": 30,
+      "y": 523,
+      "w": 315,
       "h": 12
     },
     "ficha": {
-      "x": 364,
-      "y": 681,
-      "w": 300,
-      "h": 201
+      "x": 14,
+      "y": 2015,
+      "w": 347,
+      "h": 101
     },
     "detalle": {
-      "x": 678,
-      "y": 681,
-      "w": 702,
+      "x": 14,
+      "y": 2130,
+      "w": 347,
       "h": 201
     },
     "tabla": {
-      "x": 380,
-      "y": 956,
+      "x": 30,
+      "y": 2459,
       "w": 1154,
       "h": 7050
     },
     "fuentes": {
-      "x": 380,
-      "y": 8236,
-      "w": 984,
-      "h": 437
+      "x": 30,
+      "y": 9993,
+      "w": 516,
+      "h": 887
     },
     "cabecera": {
       "x": 0,
       "y": 0,
-      "w": 1403,
-      "h": 89
+      "w": 375,
+      "h": 176
     },
     "pie": {
       "x": 0,
-      "y": 8869,
-      "w": 1403,
-      "h": 114
+      "y": 11102,
+      "w": 375,
+      "h": 222
     }
   },
   "enCero": [],
   "overflow": {
     "documento": 0,
-    "anchoVentana": 1418,
-    "anchoDocumento": 1403
+    "anchoVentana": 390,
+    "anchoDocumento": 375
   },
   "salidos": [],
   "tablaConScroll": true,
@@ -85,14 +85,14 @@
     "piePagina": 293
   },
   "mapa": {
-    "tiles": 15,
+    "tiles": 4,
     "svgPath": 0,
     "canvas": 1,
     "controlesZoom": 1
   },
   "coloresCanvas": 61,
-  "pixelesPintados": 139,
-  "altoPagina": 8983
+  "pixelesPintados": 135,
+  "altoPagina": 11324
 }
 
 == MOVIL 390x844 ==
@@ -182,7 +182,7 @@
     "piePagina": 293
   },
   "mapa": {
-    "tiles": 15,
+    "tiles": 4,
     "svgPath": 0,
     "canvas": 1,
     "controlesZoom": 1
@@ -195,7 +195,7 @@
 == RESUMEN ==
 PASS | escritorio-sin-desbordamiento | scrollWidth - clientWidth = 0
 PASS | escritorio-elementos-con-tamano | elementos en cero: ninguno
-PASS | escritorio-mapa-dibujado | canvas: 1, tiles: 15, colores distintos en el canvas: 61, muestras pintadas: 139
+PASS | escritorio-mapa-dibujado | canvas: 1, tiles: 4, colores distintos en el canvas: 61, muestras pintadas: 135
 PASS | escritorio-ficha-con-valor | ficha: 47,3 / 100
 PASS | escritorio-explicacion-presente | caracteres de explicación: 343
 PASS | escritorio-leyenda-presente | caracteres de leyenda: 67
