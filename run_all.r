@@ -45,7 +45,8 @@ cat("==============================================================\n\n")
 t0 <- Sys.time()
 for (p in pasos) {
   cat(sprintf("\n### %s  (%s)\n", p, format(Sys.time(), "%H:%M:%S")))
-  st <- system2(RSCRIPT, shQuote(p), env = c(VAEC_ROOT = raiz), stdout = "", stderr = "")
+  st <- system2(RSCRIPT, shQuote(file.path(raiz, p)),
+                stdout = "", stderr = "", wait = TRUE)
   if (st != 0) {
     cat(sprintf("\nFALLO en %s (codigo %d). Pipeline detenido.\n", p, st))
     quit(status = st)
