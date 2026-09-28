@@ -1,0 +1,46 @@
+EVIDENCIA DEL CRITERIO: 'Debe alojarse ya sea en github o en algun servidor publico de Shiny'
+Generado: 2026-09-27 21:28:33 -05:00
+------------------------------------------------------------------------------
+
+[1] REPOSITORIO PUBLICO EN GITHUB
+    nombre:        jordanvt18/vivir-activo-ec
+    visibilidad:   public
+    rama por def.: main
+    Pages habilitado: True
+    sitio declarado en el repo (homepage): https://jordanvt18.github.io/vivir-activo-ec/
+    temas: ecuador, gis, leaflet, open-data, rstats, shiny, strava, urban-planning
+    url:           https://github.com/jordanvt18/vivir-activo-ec
+
+[2] RAMAS EN EL REMOTO
+    66e38963fa3fa277aef0a5ca77eacd8af805bfe2	refs/heads/gh-pages
+    3729e87286049adc79a4de2aca01196755585819	refs/heads/main
+
+[3] GITHUB PAGES
+    estado:        built
+    url publica:   https://jordanvt18.github.io/vivir-activo-ec/
+    origen:        rama 'gh-pages', ruta '/'
+    https forzado: True
+    publico:       True
+
+[4] ULTIMO BUILD DE PAGES
+    estado: built
+    commit: 66e38963fa3fa277aef0a5ca77eacd8af805bfe2
+    error:  
+
+[5] CONTENIDO SERVIDO EN LA URL PUBLICA
+    / -> 200 9399
+    /app.js -> 200 21576
+    /styles.css -> 200 10552
+    /data/indicadores.json -> 200 194716
+    /data/cantones.geojson -> 200 1384297
+    /data/iha_cantones.csv -> 200 173714
+    marcadores en el HTML: titulo=True app.js=True mapa=True filtros encadenados=True
+
+[6] VERIFICACION DE INTERACCION SOBRE ESA MISMA URL
+    Chrome: 15/15 PASS · Edge: 15/15 PASS
+    Maquetacion escritorio + movil: 15/15 PASS en ambos navegadores
+    (verificacion_web.txt, verificacion_web_edge.txt, auditoria_layout.txt, auditoria_layout_edge.txt)
+
+CONCLUSION: el proyecto esta alojado publicamente en GitHub (repositorio) y en GitHub Pages
+(sitio), con HTTPS forzado, build correcto y la aplicacion sirviendose en
+https://jordanvt18.github.io/vivir-activo-ec/ . El criterio queda satisfecho.
